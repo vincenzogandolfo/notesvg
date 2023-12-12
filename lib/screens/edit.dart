@@ -32,57 +32,78 @@ class _EditState extends State<Edit> {
         backgroundColor: Colors.black,
         appBar: AppBar(
           backgroundColor: Colors.black,
-          leading: Container(
-            margin: const EdgeInsets.all(6),
-            decoration: BoxDecoration(
-                color: Colors.grey.shade800,
-                borderRadius: BorderRadius.circular(10)),
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
-              onPressed: () => Navigator.pop(context),
-            ),
-          ),
-          title: Text(
-            'Notes VG',
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-              color: Colors.grey.shade600,
-            ),
+          automaticallyImplyLeading: false,
+          title: Row(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.grey.shade800,
+                    borderRadius: BorderRadius.circular(10)),
+                child: IconButton(
+                  icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ),
+              const SizedBox(width: 15),
+              Text(
+                'Notes VG',
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey.shade600,
+                ),
+              ),
+            ],
           ),
           centerTitle: true,
         ),
         body: Stack(
           children: [
             Positioned(
-              left: 20,
-              top: 20,
-              right: 20,
+              left: 15,
+              top: 40,
+              right: 15,
               bottom: 0,
               child: ListView(
                 children: [
-                  TextField(
-                    onChanged: (title) {
-                      setState(() {
-                        _isTitleEmpty = title.isEmpty;
-                      });
-                    },
-                    controller: _titleController,
-                    style: const TextStyle(color: Colors.white, fontSize: 24),
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Inserire Titolo',
-                      hintStyle: TextStyle(color: Colors.grey, fontSize: 24),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.grey.shade600, width: 1),
+                    ),
+                    child: TextField(
+                      onChanged: (title) {
+                        setState(() {
+                          _isTitleEmpty = title.isEmpty;
+                        });
+                      },
+                      controller: _titleController,
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
+                      maxLines: null,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Inserire Titolo',
+                        hintStyle: TextStyle(color: Colors.grey.shade600, fontSize: 20),
+                      ),
                     ),
                   ),
-                  TextField(
-                    controller: _contentController,
-                    style: const TextStyle(color: Colors.white),
-                    maxLines: null,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: 'Inserire contenuto della nota..',
-                      hintStyle: TextStyle(color: Colors.grey),
+                  const SizedBox(height: 20),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.grey.shade600, width: 1),
+                    ),
+                    child: TextField(
+                      controller: _contentController,
+                      style: const TextStyle(color: Colors.white),
+                      maxLines: null,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: 'Inserire contenuto della nota..',
+                        hintStyle: TextStyle(color: Colors.grey.shade600),
+                      ),
                     ),
                   ),
                 ],
