@@ -194,21 +194,20 @@ class _HomeState extends State<Home> {
                                             style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 18,
-                                              fontWeight: FontWeight.bold,
+                                              fontWeight: FontWeight.w800,
                                             ),
                                           ),
-                                          const SizedBox(height: 4),
+                                          const SizedBox(height: 5),
                                           Text(
                                             filteredNotes[index].content,
-                                            maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
                                             style: const TextStyle(
                                               color: Colors.black,
                                               fontSize: 14,
-                                              fontWeight: FontWeight.normal,
+                                              fontWeight: FontWeight.w400,
                                             ),
                                           ),
-                                          const SizedBox(height: 8),
+                                          const SizedBox(height: 10),
                                           Text(
                                             'Creazione: ${DateFormat('dd/MM/yyyy h:mm a').format(filteredNotes[index].modifiedTime)}',
                                             style: TextStyle(
@@ -246,7 +245,27 @@ class _HomeState extends State<Home> {
                             icon: const Icon(Icons.note_add),
                             iconSize: 50,
                             color: Colors.white,
-                            onPressed: () {},
+                            onPressed: () async {
+                              final result = await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) => const Edit(),
+                                ),
+                              );
+                              if (result != null) {
+                                setState(() {
+                                  sampleNotes.add(
+                                    Note(
+                                      id: sampleNotes.length,
+                                      title: result[0],
+                                      content: result[1],
+                                      modifiedTime: DateTime.now(),
+                                    ),
+                                  );
+                                  filteredNotes = sampleNotes;
+                                });
+                              }
+                            },
                           ),
                           const SizedBox(height: 15),
                           const Text('Elenco vuoto',
