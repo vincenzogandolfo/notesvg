@@ -40,7 +40,8 @@ class _EditState extends State<Edit> {
                     color: Colors.grey.shade800,
                     borderRadius: BorderRadius.circular(10)),
                 child: IconButton(
-                  icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+                  icon:
+                      const Icon(Icons.arrow_back_ios_new, color: Colors.white),
                   onPressed: () => Navigator.pop(context),
                 ),
               ),
@@ -55,7 +56,6 @@ class _EditState extends State<Edit> {
               ),
             ],
           ),
-          centerTitle: true,
         ),
         body: Stack(
           children: [
@@ -66,10 +66,12 @@ class _EditState extends State<Edit> {
               bottom: 0,
               child: ListView(
                 children: [
+                  const Text('Titolo', style: TextStyle(color: Colors.white)),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    margin: const EdgeInsets.only(top: 6),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(10),
                       border: Border.all(color: Colors.grey.shade600, width: 1),
                     ),
                     child: TextField(
@@ -84,15 +86,19 @@ class _EditState extends State<Edit> {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Inserire Titolo',
-                        hintStyle: TextStyle(color: Colors.grey.shade600, fontSize: 20),
+                        hintStyle: TextStyle(
+                            color: Colors.grey.shade600, fontSize: 20),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 30),
+                  const Text('Contenuto',
+                      style: TextStyle(color: Colors.white)),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    margin: const EdgeInsets.only(top: 6),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(10),
                       border: Border.all(color: Colors.grey.shade600, width: 1),
                     ),
                     child: TextField(
@@ -114,19 +120,17 @@ class _EditState extends State<Edit> {
               left: 20,
               right: 20,
               child: GestureDetector(
-                onTap: !_isTitleEmpty
-                    ? () {
-                        Navigator.pop(context, [
-                          _titleController.text,
-                          _contentController.text,
-                        ]);
-                      }
-                    : null,
+                onTap: () {
+                  Navigator.pop(context, [
+                    _titleController.text,
+                    _contentController.text,
+                  ]);
+                },
                 child: Container(
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
                     color: Colors.yellow.shade100,
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,

@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         backgroundColor: Colors.black,
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           child: Column(
             children: [
               Row(
@@ -209,7 +209,7 @@ class _HomeState extends State<Home> {
                                           ),
                                           const SizedBox(height: 10),
                                           Text(
-                                            'Creazione: ${DateFormat('dd/MM/yyyy h:mm a').format(filteredNotes[index].modifiedTime)}',
+                                            'Creazione: ${DateFormat('dd/MM/yyyy - HH:mm').format(filteredNotes[index].modifiedTime)}',
                                             style: TextStyle(
                                               color: Colors.grey.shade800,
                                               fontSize: 12,
@@ -224,7 +224,8 @@ class _HomeState extends State<Home> {
                                         icon: const Icon(Icons.delete),
                                         color: Colors.black,
                                         onPressed: () async {
-                                          final result = await confirmDialog(context);
+                                          final result =
+                                              await confirmDialog(context);
                                           if (result != null && result) {
                                             onDeleteNote(index);
                                           }
@@ -249,7 +250,8 @@ class _HomeState extends State<Home> {
                               final result = await Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (BuildContext context) => const Edit(),
+                                  builder: (BuildContext context) =>
+                                      const Edit(),
                                 ),
                               );
                               if (result != null) {
@@ -290,16 +292,18 @@ class _HomeState extends State<Home> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Colors.grey.shade800,
-          icon: const Icon(
+          backgroundColor: Colors.white,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20))),
+          icon: Icon(
             Icons.info,
-            color: Colors.grey,
+            color: Colors.grey.shade400,
           ),
           title: const Text(
-            "Vuoi davvero eliminare la nota?",
+            "Vuoi eliminare la nota?",
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.black,
             ),
           ),
           content: Row(
@@ -307,7 +311,12 @@ class _HomeState extends State<Home> {
             children: [
               ElevatedButton(
                 onPressed: () => Navigator.pop(context, false),
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.grey),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey.shade400,
+                  elevation: 10,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                ),
                 child: const Text(
                   "Annulla",
                   textAlign: TextAlign.center,
@@ -316,7 +325,12 @@ class _HomeState extends State<Home> {
               ),
               ElevatedButton(
                 onPressed: () => Navigator.pop(context, true),
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  elevation: 10,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                ),
                 child: const Text(
                   "Elimina",
                   textAlign: TextAlign.center,
