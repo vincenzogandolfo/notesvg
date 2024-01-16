@@ -37,6 +37,28 @@ class _HomeState extends State<Home> {
     });
   }
 
+  void addNote() async {
+    final result = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => const Edit(),
+      ),
+    );
+    if (result != null) {
+      setState(() {
+        sampleNotes.add(
+          Note(
+            id: sampleNotes.length,
+            title: result[0],
+            content: result[1],
+            modifiedTime: DateTime.now(),
+          ),
+        );
+        filteredNotes = sampleNotes;
+      });
+    }
+  }
+
   void onDeleteNote(int index) {
     setState(() {
       Note note = filteredNotes[index];
@@ -66,27 +88,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () async {
-                      final result = await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => const Edit(),
-                        ),
-                      );
-                      if (result != null) {
-                        setState(() {
-                          sampleNotes.add(
-                            Note(
-                              id: sampleNotes.length,
-                              title: result[0],
-                              content: result[1],
-                              modifiedTime: DateTime.now(),
-                            ),
-                          );
-                          filteredNotes = sampleNotes;
-                        });
-                      }
-                    },
+                    onTap: addNote,
                     child: Container(
                       padding: const EdgeInsets.fromLTRB(5, 5, 10, 5),
                       decoration: BoxDecoration(
@@ -95,14 +97,9 @@ class _HomeState extends State<Home> {
                       ),
                       child: const Row(
                         children: [
-                          Icon(
-                            Icons.add,
-                            color: Colors.white,
-                          ),
+                          Icon(Icons.add, color: Colors.white),
                           SizedBox(width: 2),
-                          Text('Aggiungi',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16)),
+                          Text('Aggiungi', style: TextStyle(color: Colors.white, fontSize: 16)),
                         ],
                       ),
                     ),
@@ -154,8 +151,7 @@ class _HomeState extends State<Home> {
                               );
                               if (result != null) {
                                 setState(() {
-                                  int originalIndex =
-                                      sampleNotes.indexOf(filteredNotes[index]);
+                                  int originalIndex = sampleNotes.indexOf(filteredNotes[index]);
 
                                   sampleNotes[originalIndex] = Note(
                                     id: sampleNotes[originalIndex].id,
@@ -163,6 +159,7 @@ class _HomeState extends State<Home> {
                                     content: result[1],
                                     modifiedTime: DateTime.now(),
                                   );
+
                                   filteredNotes[index] = Note(
                                     id: filteredNotes[index].id,
                                     title: result[0],
@@ -246,37 +243,14 @@ class _HomeState extends State<Home> {
                             icon: const Icon(Icons.note_add),
                             iconSize: 50,
                             color: Colors.white,
-                            onPressed: () async {
-                              final result = await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (BuildContext context) =>
-                                      const Edit(),
-                                ),
-                              );
-                              if (result != null) {
-                                setState(() {
-                                  sampleNotes.add(
-                                    Note(
-                                      id: sampleNotes.length,
-                                      title: result[0],
-                                      content: result[1],
-                                      modifiedTime: DateTime.now(),
-                                    ),
-                                  );
-                                  filteredNotes = sampleNotes;
-                                });
-                              }
-                            },
+                            onPressed: addNote,
                           ),
                           const SizedBox(height: 15),
                           const Text('Elenco vuoto',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20)),
+                              style: TextStyle(color: Colors.white, fontSize: 20)),
                           const SizedBox(height: 10),
                           const Text('(Aggiungi una nota)',
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 16)),
+                              style: TextStyle(color: Colors.grey, fontSize: 16)),
                         ],
                       ),
               ),
